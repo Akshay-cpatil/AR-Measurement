@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+    <title>Measurement Web App</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Bootstrap Icons -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+
+<body class="bg-dark text-light">
+    <!-- UI Container -->
+    <div id="ui-container"
+        class="container-fluid min-vh-100 d-flex flex-column align-items-center justify-content-center">
+        <!-- Landing View -->
+        <div id="landing-view" class="text-center w-100 px-3 py-4" style="max-width: 500px;">
+            <img src="logo for measure.png" alt="Measurement App Logo" class="img-fluid mb-3"
+                style="max-height: 100px; object-fit: contain;">
+            <h1 class="mb-4 fw-bold" style="color: #00D1FF;">AR Measure</h1>
+
+            <button id="btn-ar-ruler" class="btn btn-lg w-100 mb-5 p-4 rounded-4 shadow-sm custom-btn">
+                <i class="bi bi-camera me-2 fs-1 d-block mb-2"></i>
+                <span class="fs-5 fw-semibold">Start Spatial Ruler</span>
+            </button>
+
+            <!-- App Details & Features -->
+            <div class="text-start bg-dark bg-opacity-25 p-4 rounded-4 border border-secondary shadow-sm">
+                <h5 class="text-info fw-bold mb-3"><i class="bi bi-shield-lock-fill me-2"></i>Privacy First</h5>
+                <ul class="list-unstyled small text-light mb-0" style="line-height: 1.8;">
+                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>Data Security:</strong> Runs
+                        entirely on your device.</li>
+                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>No Data Stored:</strong>
+                        Measurements are never saved or sent.</li>
+                    <li><i class="bi bi-check-circle-fill text-success me-2"></i> <strong>No Tracking:</strong> Zero
+                        location logging or camera analytics.</li>
+                </ul>
+            </div>
+
+            <div id="xr-unsupported-alert" class="alert alert-warning mt-4 d-none">
+                <i class="bi bi-exclamation-triangle me-2"></i> Your browser does not support WebXR AR features.
+            </div>
+        </div>
+
+        <!-- Navigation Buttons -->
+        <div class="position-absolute top-0 end-0 m-3 d-flex gap-2" style="z-index: 1050;">
+            <button id="btn-clear" class="btn btn-warning d-none shadow">
+                <i class="bi bi-trash"></i> Clear All
+            </button>
+            <button id="btn-back" class="btn btn-secondary d-none shadow">
+                <i class="bi bi-x-lg"></i> Close
+            </button>
+        </div>
+
+
+
+        <!-- AR Ruler Overlay UI -->
+        <div id="ar-view" class="w-100 h-100 position-absolute top-0 start-0 pe-none d-none" style="z-index: 1000;">
+            <div class="position-absolute bottom-0 start-50 translate-middle-x mb-5 pe-auto" style="min-width: 280px;">
+                <div class="bg-dark bg-opacity-75 py-3 px-4 rounded-4 border border-info text-center shadow blur-bg">
+                    <div id="ar-status" class="small text-light mb-2">Point camera at a surface...</div>
+                    <div class="fs-2 mb-2">Distance: <span id="ar-distance" class="text-info fw-bold">0.00 cm</span>
+                    </div>
+
+                    <div class="btn-group btn-group-sm w-100" role="group">
+                        <input type="radio" class="btn-check" name="unit-radio" id="unit-cm" checked>
+                        <label class="btn btn-outline-info" for="unit-cm">CM</label>
+
+                        <input type="radio" class="btn-check" name="unit-radio" id="unit-ft">
+                        <label class="btn btn-outline-info" for="unit-ft">FT/IN</label>
+                    </div>
+                </div>
+            </div>
+
+            <div id="ar-instructions"
+                class="position-absolute top-0 start-50 translate-middle-x mt-4 bg-dark bg-opacity-75 p-3 rounded-3 text-center transition-fade text-light fw-semibold"
+                style="max-width: 90%;">
+                Slowly scan a floor, table, or textured wall.<br>Wait for the blue ring to appear.
+            </div>
+
+            <!-- Fixed 2D Center Reference Point -->
+            <div class="position-absolute top-50 start-50 translate-middle pe-none"
+                style="width: 14px; height: 14px; background-color: rgba(255,255,255,0.75); border: 2px solid rgba(0,0,0,0.5); border-radius: 50%;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js for simple WebXR management and rendering -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="js/ar-ruler.js"></script>
+
+    <script src="js/app.js"></script>
+</body>
+
+</html>
